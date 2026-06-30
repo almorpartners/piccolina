@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Piccolina — Prêt-à-porter & accessoires à La Baule-les-Pins</title>
+<meta name="description" content="Piccolina, boutique de prêt-à-porter féminin, bijoux et accessoires à La Baule-les-Pins depuis plus de 30 ans. Vanessa Bruno, HIGH, NotShy.">
+
+<!--
+  ============================================================
+  GUIDE D'INTÉGRATION DES IMAGES
+  ============================================================
+  Ce fichier contient des emplacements réservés (encadrés en
+  pointillés) à la place de chaque photo. Pour les remplacer :
+
+  1. Place tes fichiers images dans un dossier /images à côté
+     de ce fichier HTML.
+  2. Repère le commentaire "EMPLACEMENT IMAGE" juste au-dessus
+     de chaque <div class="placeholder-img">.
+  3. Remplace le <div class="placeholder-img ...">...</div>
+     entier par : <img src="images/ton-fichier.jpg" alt="..." class="real-img">
+     (en gardant la classe du conteneur parent si besoin pour le cadrage)
+
+  Emplacements prévus dans ce fichier :
+   - Logo (header + footer)
+   - Image de fond du hero (vitrine ou devanture de la boutique)
+   - Photo "Univers Piccolina" (intérieur boutique ou Lynda)
+   - 3 photos de collections (Vêtements / Bijoux & Accessoires / Nouveautés)
+   - Photo bandeau "Infos pratiques"
+  ============================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* ============================================
+     TOKENS — palette & typographie
+     ============================================ */
+  :root{
+    --c-cream:        #FAF2E4;
+    --c-cream-light:  #FFFBF3;
+    --c-terracotta:   #D87B4A;
+    --c-corail:       #F0A471;
+    --c-miel:         #E2A23A;
+    --c-sauge:        #8C9968;
+    --c-sauge-dark:   #6F7D52;
+    --c-noir:         #221D17;
+    --c-noir-soft:    #36302A;
+
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body:    'Work Sans', sans-serif;
+
+    --maxw: 1180px;
+    --radius: 2px;
+    --transition: 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior:smooth; }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *,*::before,*::after{
+      animation-duration:0.01ms !important;
+      animation-iteration-count:1 !important;
+      transition-duration:0.01ms !important;
+      scroll-behavior:auto !important;
+    }
+  }
+
+  body{
+    font-family:var(--font-body);
+    background:var(--c-cream-light);
+    color:var(--c-noir);
+    line-height:1.6;
+    font-weight:300;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,h4{
+    font-family:var(--font-display);
+    font-weight:600;
+    line-height:1.1;
+    color:var(--c-noir);
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  img{ max-width:100%; display:block; }
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  a:focus-visible,
+  button:focus-visible{
+    outline:2px solid var(--c-terracotta);
+    outline-offset:3px;
+  }
+
+  /* ============================================
+     PLACEHOLDERS IMAGE
+     ============================================ */
+  .placeholder-img{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    width:100%;
+    height:100%;
+    background:
+      repeating-linear-gradient(135deg, rgba(34,29,23,0.04) 0 2px, transparent 2px 14px),
+      var(--c-cream);
+    border:1.5px dashed rgba(34,29,23,0.28);
+    color:rgba(34,29,23,0.5);
+    text-align:center;
+    padding:20px;
+  }
+  .placeholder-img svg{ width:34px; height:34px; opacity:0.55; }
+  .placeholder-img span{
+    font-size:0.72rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    font-weight:500;
+    max-width:220px;
+  }
+
+  /* ============================================
+     HEADER
+     ============================================ */
+  header{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:100;
+    padding:18px 0;
+    transition:background var(--transition), padding var(--transition), box-shadow var(--transition);
+  }
+  header.scrolled{
+    background:rgba(255,251,243,0.92);
+    backdrop-filter:blur(8px);
+    padding:12px 0;
+    box-shadow:0 1px 0 rgba(34,29,23,0.08);
+  }
+  header .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .logo-zone{ display:flex; align-items:center; gap:12px; }
+  .logo-ph{ width:56px; height:56px; border-radius:50%; }
+  .logo-ph svg{ width:22px; height:22px; }
+  .logo-ph span{ font-size:0.55rem; }
+  .brandname{
+    font-family:var(--font-display);
+    font-size:1.5rem;
+    font-weight:600;
+    letter-spacing:0.02em;
+    color:var(--c-noir);
+    transition:color var(--transition);
+  }
+  header:not(.scrolled) .brandname{ color:var(--c-cream-light); }
+  header:not(.scrolled) .logo-ph{
+    border-color:rgba(255,251,243,0.55);
+    color:rgba(255,251,243,0.75);
+  }
+
+  nav.main-nav{ display:flex; align-items:center; gap:36px; }
+  nav.main-nav a{
+    font-size:0.85rem;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    font-weight:500;
+    color:var(--c-noir);
+    position:relative;
+    padding-bottom:4px;
+    transition:color var(--transition);
+  }
+  header:not(.scrolled) nav.main-nav a{ color:var(--c-cream-light); }
+  nav.main-nav a::after{
+    content:'';
+    position:absolute; left:0; bottom:0;
+    width:0; height:1.5px;
+    background:currentColor;
+    transition:width 0.35s ease;
+  }
+  nav.main-nav a:hover::after{ width:100%; }
+
+  .nav-phone{
+    display:flex; align-items:center; gap:8px;
+    font-size:0.85rem; font-weight:500;
+  }
+
+  .nav-toggle{
+    display:none;
+    background:none; border:none; cursor:pointer;
+    width:32px; height:24px; position:relative;
+  }
+  .nav-toggle span{
+    position:absolute; left:0; width:100%; height:2px;
+    background:currentColor; transition:var(--transition);
+  }
+  .nav-toggle span:nth-child(1){ top:0; }
+  .nav-toggle span:nth-child(2){ top:11px; }
+  .nav-toggle span:nth-child(3){ top:22px; }
+  header:not(.scrolled) .nav-toggle{ color:var(--c-cream-light); }
+  .nav-toggle{ color:var(--c-noir); }
+
+  /* ============================================
+     HERO
+     ============================================ */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:flex-end;
+    overflow:hidden;
+    background:linear-gradient(150deg, var(--c-terracotta) 0%, var(--c-corail) 48%, var(--c-miel) 100%);
+  }
+
+  /* EMPLACEMENT IMAGE : photo de fond hero — vitrine ou devanture
+     de la boutique Piccolina. Remplacer .hero-bg-ph par :
+     <img class="hero-bg-img" src="images/devanture.jpg" alt=""> */
+  .hero-bg-ph{
+    position:absolute; inset:0;
+    background:rgba(34,29,23,0.18);
+    border:none;
+    border-radius:0;
+  }
+  .hero-bg-ph::after{
+    content:'';
+    position:absolute; inset:0;
+    background:linear-gradient(0deg, rgba(34,29,23,0.55) 0%, rgba(34,29,23,0.05) 55%);
+  }
+  .hero-bg-ph .ph-label{
+    position:relative; z-index:1;
+    color:rgba(255,251,243,0.85);
+  }
+  .hero-bg-ph svg{ opacity:0.7; }
+
+  .hero-content{
+    position:relative; z-index:2;
+    width:100%;
+    padding:0 32px 90px;
+    max-width:var(--maxw);
+    margin:0 auto;
+    color:var(--c-cream-light);
+  }
+  .hero-eyebrow{
+    font-size:0.8rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    font-weight:500;
+    opacity:0.9;
+    margin-bottom:18px;
+    display:block;
+  }
+  .hero h1{
+    font-size:clamp(3.2rem, 9vw, 7.5rem);
+    font-style:italic;
+    font-weight:500;
+    color:var(--c-cream-light);
+  }
+  .hero-tagline{
+    margin-top:22px;
+    max-width:480px;
+    font-size:1.15rem;
+    font-weight:300;
+    color:rgba(255,251,243,0.92);
+  }
+  .hero-cta{
+    margin-top:38px;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:var(--c-cream-light);
+    color:var(--c-noir);
+    padding:14px 30px;
+    font-size:0.82rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    font-weight:500;
+    border-radius:1px;
+    transition:transform var(--transition), background var(--transition);
+  }
+  .hero-cta:hover{ transform:translateY(-2px); background:#fff; }
+
+  .scroll-cue{
+    position:absolute; bottom:28px; left:50%;
+    transform:translateX(-50%);
+    z-index:2;
+    width:1px; height:46px;
+    background:rgba(255,251,243,0.55);
+  }
+  .scroll-cue::after{
+    content:'';
+    position:absolute; top:0; left:-2.5px;
+    width:6px; height:6px; border-radius:50%;
+    background:var(--c-cream-light);
+    animation:scrollDot 2.2s ease-in-out infinite;
+  }
+  @keyframes scrollDot{
+    0%{ top:0; opacity:1; }
+    80%{ opacity:1; }
+    100%{ top:40px; opacity:0; }
+  }
+
+  /* ============================================
+     SIGNATURE — fil de couleurs (divider entre sections)
+     ============================================ */
+  .thread-divider{
+    position:relative;
+    height:90px;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--c-cream-light);
+  }
+  .thread-divider svg{ width:100%; max-width:420px; height:34px; overflow:visible; }
+  .thread-divider .thread-line{
+    fill:none;
+    stroke:rgba(34,29,23,0.18);
+    stroke-width:1.4;
+    stroke-dasharray:340;
+    stroke-dashoffset:340;
+    transition:stroke-dashoffset 1.4s cubic-bezier(0.22,1,0.36,1);
+  }
+  .thread-divider.in-view .thread-line{ stroke-dashoffset:0; }
+  .thread-divider circle{
+    opacity:0;
+    transform:scale(0.4);
+    transform-origin:center;
+    transition:opacity 0.5s ease, transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .thread-divider.in-view circle{ opacity:1; transform:scale(1); }
+  .thread-divider.in-view circle:nth-child(2){ transition-delay:0.5s; }
+  .thread-divider.in-view circle:nth-child(3){ transition-delay:0.65s; }
+  .thread-divider.in-view circle:nth-child(4){ transition-delay:0.8s; }
+  .thread-divider.in-view circle:nth-child(5){ transition-delay:0.95s; }
+
+  /* ============================================
+     SECTIONS génériques
+     ============================================ */
+  section{ padding:110px 0; }
+  .section-head{ margin-bottom:56px; max-width:560px; }
+  .eyebrow{
+    display:block;
+    font-size:0.78rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    font-weight:500;
+    color:var(--c-terracotta);
+    margin-bottom:14px;
+  }
+  .section-head h2{
+    font-size:clamp(2.2rem, 4.5vw, 3.2rem);
+    font-style:italic;
+    font-weight:500;
+  }
+
+  .reveal{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1);
+  }
+  .reveal.in-view{ opacity:1; transform:translateY(0); }
+  .reveal-delay-1.in-view{ transition-delay:0.12s; }
+  .reveal-delay-2.in-view{ transition-delay:0.24s; }
+  .reveal-delay-3.in-view{ transition-delay:0.36s; }
+
+  /* ============================================
+     UNIVERS PICCOLINA
+     ============================================ */
+  .univers{ background:var(--c-cream-light); }
+  .univers .wrap{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:64px;
+    align-items:center;
+  }
+  /* EMPLACEMENT IMAGE : photo intérieur boutique ou portrait
+     de Lynda Picollo Benaissa. Remplacer .univers-img-ph par :
+     <img src="images/interieur.jpg" alt="Intérieur boutique Piccolina"> */
+  .univers-img-ph{
+    aspect-ratio:4/5;
+    border-radius:2px;
+  }
+  .univers-text p{
+    font-size:1.05rem;
+    font-weight:300;
+    color:var(--c-noir-soft);
+    margin-bottom:20px;
+  }
+  .univers-text p.lead{
+    font-family:var(--font-display);
+    font-style:italic;
+    font-size:1.5rem;
+    color:var(--c-noir);
+    line-height:1.4;
+    margin-bottom:26px;
+  }
+  .signature-line{
+    font-family:var(--font-display);
+    font-style:italic;
+    font-size:1.05rem;
+    color:var(--c-terracotta);
+    margin-top:30px;
+  }
+
+  /* ============================================
+     COLLECTIONS
+     ============================================ */
+  .collections{ background:var(--c-cream); }
+  .collection-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:32px;
+  }
+  .collection-card{
+    background:var(--c-cream-light);
+    overflow:hidden;
+    transition:transform var(--transition), box-shadow var(--transition);
+  }
+  .collection-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 24px 48px -20px rgba(34,29,23,0.25);
+  }
+  /* EMPLACEMENT IMAGE : x3 — une par catégorie (Vêtements,
+     Bijoux & Accessoires, Nouveautés). Remplacer .collection-img-ph
+     par : <img src="images/collection-vetements.jpg" alt="..."> */
+  .collection-img-ph{ aspect-ratio:3/4; }
+  .collection-body{ padding:26px 24px 30px; }
+  .collection-body h3{
+    font-size:1.5rem;
+    font-style:italic;
+    font-weight:500;
+    margin-bottom:10px;
+  }
+  .collection-body p{
+    font-size:0.92rem;
+    color:var(--c-noir-soft);
+    margin-bottom:18px;
+  }
+  .collection-link{
+    font-size:0.78rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    font-weight:500;
+    color:var(--c-terracotta);
+    display:inline-flex; align-items:center; gap:6px;
+    transition:gap var(--transition);
+  }
+  .collection-link:hover{ gap:11px; }
+
+  /* ============================================
+     MARQUES
+     ============================================ */
+  .marques{
+    background:var(--c-sauge);
+    color:var(--c-cream-light);
+    padding:80px 0;
+  }
+  .marques .section-head{ max-width:600px; }
+  .marques .eyebrow{ color:rgba(255,251,243,0.85); }
+  .marques .section-head h2{ color:var(--c-cream-light); }
+  .marques-list{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:0;
+    border-top:1px solid rgba(255,251,243,0.25);
+  }
+  .marques-list span.brand{
+    font-family:var(--font-display);
+    font-style:italic;
+    font-size:1.9rem;
+    font-weight:500;
+    padding:30px 38px;
+    border-bottom:1px solid rgba(255,251,243,0.25);
+    flex:1;
+    text-align:center;
+    min-width:200px;
+  }
+  .marques-note{
+    margin-top:26px;
+    font-size:0.88rem;
+    color:rgba(255,251,243,0.8);
+    font-weight:300;
+  }
+
+  /* ============================================
+     INFOS PRATIQUES
+     ============================================ */
+  .infos{ background:var(--c-cream-light); }
+  .infos-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0;
+    background:var(--c-noir);
+    color:var(--c-cream-light);
+    border-radius:2px;
+    overflow:hidden;
+  }
+  .infos-card{ padding:64px 56px; }
+  .infos-card h3{
+    font-style:italic;
+    color:var(--c-cream-light);
+    font-size:1.8rem;
+    margin-bottom:30px;
+  }
+  .infos-row{
+    display:flex;
+    gap:16px;
+    align-items:flex-start;
+    margin-bottom:24px;
+    font-size:0.95rem;
+    font-weight:300;
+    color:rgba(255,251,243,0.88);
+  }
+  .infos-row svg{ width:20px; height:20px; flex-shrink:0; margin-top:2px; opacity:0.85; }
+  .infos-row strong{
+    display:block;
+    font-weight:500;
+    color:var(--c-cream-light);
+    margin-bottom:2px;
+  }
+  .infos-cta{
+    margin-top:30px;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    border:1px solid rgba(255,251,243,0.4);
+    padding:12px 26px;
+    font-size:0.78rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    font-weight:500;
+    transition:background var(--transition), border-color var(--transition);
+  }
+  .infos-cta:hover{ background:rgba(255,251,243,0.1); border-color:rgba(255,251,243,0.7); }
+
+  .infos-map{ position:relative; min-height:340px; background:var(--c-cream); }
+  .infos-map iframe{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    border:0;
+    filter:grayscale(0.15) contrast(1.05);
+  }
+
+  /* ============================================
+     FOOTER
+     ============================================ */
+  footer{
+    background:var(--c-noir);
+    color:rgba(255,251,243,0.7);
+    padding:48px 0 28px;
+  }
+  footer .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:20px;
+  }
+  .footer-brand{ display:flex; align-items:center; gap:14px; }
+  /* EMPLACEMENT IMAGE : logo (variante claire) pour le footer.
+     Remplacer .footer-logo-ph par : <img src="images/logo-blanc.png" alt="Piccolina"> */
+  .footer-logo-ph{
+    width:40px; height:40px; border-radius:50%;
+    border-color:rgba(255,251,243,0.3);
+    color:rgba(255,251,243,0.5);
+  }
+  .footer-logo-ph svg{ width:16px; height:16px; }
+  .footer-logo-ph span{ display:none; }
+  .footer-brand-name{
+    font-family:var(--font-display);
+    font-style:italic;
+    font-size:1.2rem;
+    color:rgba(255,251,243,0.9);
+  }
+  .footer-social{ display:flex; gap:18px; }
+  .footer-social a{
+    width:38px; height:38px;
+    border:1px solid rgba(255,251,243,0.25);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    transition:background var(--transition), border-color var(--transition);
+  }
+  .footer-social a:hover{ background:rgba(255,251,243,0.1); border-color:rgba(255,251,243,0.6); }
+  .footer-social svg{ width:16px; height:16px; }
+  .footer-bottom{
+    text-align:center;
+    font-size:0.78rem;
+    margin-top:36px;
+    color:rgba(255,251,243,0.4);
+  }
+
+  /* ============================================
+     RESPONSIVE
+     ============================================ */
+  @media (max-width: 900px){
+    .univers .wrap{ grid-template-columns:1fr; gap:40px; }
+    .univers-img-ph{ aspect-ratio:16/10; }
+    .collection-grid{ grid-template-columns:1fr 1fr; }
+    .infos-grid{ grid-template-columns:1fr; }
+    .infos-map{ min-height:280px; }
+  }
+
+  @media (max-width: 720px){
+    nav.main-nav{
+      position:fixed; top:0; right:0;
+      height:100vh; width:78%; max-width:320px;
+      background:var(--c-cream-light);
+      flex-direction:column;
+      align-items:flex-start;
+      justify-content:center;
+      gap:30px;
+      padding:0 40px;
+      transform:translateX(100%);
+      transition:transform var(--transition);
+      box-shadow:-10px 0 30px rgba(0,0,0,0.1);
+    }
+    nav.main-nav.open{ transform:translateX(0); }
+    nav.main-nav a{ color:var(--c-noir) !important; font-size:1.05rem; }
+    .nav-toggle{ display:block; z-index:101; }
+    .nav-phone{ display:none; }
+    header:not(.scrolled) .nav-toggle{ color:var(--c-cream-light); }
+    header.scrolled .nav-toggle, .nav-toggle.is-open{ color:var(--c-noir); }
+
+    .collection-grid{ grid-template-columns:1fr; }
+    .marques-list span.brand{ flex:1 1 100%; }
+    .infos-card{ padding:48px 28px; }
+    section{ padding:80px 0; }
+    .wrap{ padding:0 22px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     HEADER
+     ============================================ -->
+<header id="siteHeader">
+  <div class="wrap">
+    <div class="logo-zone">
+      <!-- EMPLACEMENT IMAGE : Logo Piccolina (header)
+           Remplacer ce <div> par :
+           <img src="images/logo.png" alt="Piccolina" class="logo-img" style="width:56px;height:56px;border-radius:50%;object-fit:cover;">
+           Format conseillé : PNG transparent ou SVG, carré, ~200x200px -->
+      <div class="placeholder-img logo-ph">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span>Logo</span>
+      </div>
+      <span class="brandname">Piccolina</span>
+    </div>
+
+    <nav class="main-nav" id="mainNav">
+      <a href="#univers">L'univers</a>
+      <a href="#collections">Collections</a>
+      <a href="#marques">Marques</a>
+      <a href="#infos">Infos pratiques</a>
+      <span class="nav-phone">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.81.34 1.6.65 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.22a2 2 0 0 1 2.11-.45c.74.31 1.53.53 2.34.65A2 2 0 0 1 22 16.92z"/></svg>
+        02 44 07 63 27
+      </span>
+    </nav>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ============================================
+     HERO
+     ============================================ -->
+<section class="hero">
+  <!-- EMPLACEMENT IMAGE : photo de fond hero (vitrine / devanture
+       de la boutique, idéalement prise en extérieur, lumière naturelle).
+       Remplacer le <div class="hero-bg-ph"> par :
+       <img src="images/devanture.jpg" alt="" class="hero-bg-img"
+            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+       puis garder le calque <div> avec ::after pour l'assombrissement
+       (ou ajouter un <div class="hero-bg-ph" style="background:none;border:none;"></div> par-dessus). -->
+  <div class="placeholder-img hero-bg-ph">
+    <div class="ph-label" style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="40" height="40"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span>Photo de la devanture ou de la vitrine Piccolina</span>
+    </div>
+  </div>
+
+  <div class="hero-content">
+    <span class="hero-eyebrow reveal in-view">La Baule-les-Pins · Depuis plus de 30 ans</span>
+    <h1 class="reveal in-view">Piccolina</h1>
+    <p class="hero-tagline reveal in-view reveal-delay-1">Prêt-à-porter, bijoux et accessoires choisis avec cœur — où chaque couleur trouve sa place à côté des autres.</p>
+    <a href="#infos" class="hero-cta reveal in-view reveal-delay-2">
+      Nous rendre visite
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+
+  <div class="scroll-cue"></div>
+</section>
+
+<!-- Divider signature : fil de couleurs -->
+<div class="thread-divider reveal-thread">
+  <svg viewBox="0 0 340 34" preserveAspectRatio="xMidYMid meet">
+    <path class="thread-line" d="M2 17 C 60 2, 100 32, 170 17 S 280 2, 338 17"/>
+    <circle cx="2" cy="17" r="5" fill="#D87B4A"/>
+    <circle cx="113" cy="22" r="5" fill="#E2A23A"/>
+    <circle cx="170" cy="17" r="5.5" fill="#8C9968"/>
+    <circle cx="227" cy="11" r="5" fill="#F0A471"/>
+    <circle cx="338" cy="17" r="5" fill="#D87B4A"/>
+  </svg>
+</div>
+
+<!-- ============================================
+     UNIVERS PICCOLINA
+     ============================================ -->
+<section class="univers" id="univers">
+  <div class="wrap">
+    <!-- EMPLACEMENT IMAGE : photo intérieur boutique, ou portrait
+         de Lynda dans la boutique. Remplacer .univers-img-ph par :
+         <img src="images/interieur-boutique.jpg" alt="Intérieur de la boutique Piccolina"> -->
+    <div class="placeholder-img univers-img-ph reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span>Photo intérieur boutique ou portrait de Lynda</span>
+    </div>
+
+    <div class="univers-text">
+      <span class="eyebrow reveal">L'univers Piccolina</span>
+      <p class="lead reveal reveal-delay-1">Les couleurs se subliment les unes les autres.</p>
+      <p class="reveal reveal-delay-2">Depuis plus de trente ans, Piccolina sélectionne pour vous des pièces coup de cœur, commandées en petites séries pour rester unique. Ici, la couleur mène la danse : le noir n'apparaît que pour la faire ressortir.</p>
+      <p class="reveal reveal-delay-2">Coupe, finitions, matières naturelles : chaque vêtement est choisi avec la même exigence, qu'il s'agisse d'une tenue de semaine, d'un look sport-chic ou d'une pièce pour les grandes occasions.</p>
+      <p class="signature-line reveal reveal-delay-3">— Lynda Picollo Benaissa, fondatrice</p>
+    </div>
+  </div>
+</section>
+
+<div class="thread-divider reveal-thread">
+  <svg viewBox="0 0 340 34" preserveAspectRatio="xMidYMid meet">
+    <path class="thread-line" d="M2 17 C 60 32, 100 2, 170 17 S 280 32, 338 17"/>
+    <circle cx="2" cy="17" r="5" fill="#8C9968"/>
+    <circle cx="113" cy="11" r="5" fill="#F0A471"/>
+    <circle cx="170" cy="17" r="5.5" fill="#D87B4A"/>
+    <circle cx="227" cy="23" r="5" fill="#E2A23A"/>
+    <circle cx="338" cy="17" r="5" fill="#8C9968"/>
+  </svg>
+</div>
+
+<!-- ============================================
+     COLLECTIONS
+     ============================================ -->
+<section class="collections" id="collections">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Sélection</span>
+      <h2>Trois univers, une même exigence</h2>
+    </div>
+
+    <div class="collection-grid">
+      <article class="collection-card reveal">
+        <!-- EMPLACEMENT IMAGE : photo représentative des vêtements
+             (penderie, look complet, détail textile...). Remplacer par :
+             <img src="images/collection-vetements.jpg" alt="Vêtements Piccolina"> -->
+        <div class="placeholder-img collection-img-ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Photo vêtements</span>
+        </div>
+        <div class="collection-body">
+          <h3>Vêtements</h3>
+          <p>Robes, vestes, pièces du quotidien et tenues habillées — sport-chic ou plus élégantes, pour chaque moment de la semaine.</p>
+          <a href="#infos" class="collection-link">Découvrir en boutique <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+
+      <article class="collection-card reveal reveal-delay-1">
+        <!-- EMPLACEMENT IMAGE : photo bijoux / accessoires (bagues,
+             colliers, sacs...). Remplacer par :
+             <img src="images/collection-bijoux.jpg" alt="Bijoux et accessoires Piccolina"> -->
+        <div class="placeholder-img collection-img-ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Photo bijoux & accessoires</span>
+        </div>
+        <div class="collection-body">
+          <h3>Bijoux & accessoires</h3>
+          <p>De quoi compléter une silhouette : bijoux fantaisie, sacs et petits accessoires sélectionnés pièce par pièce.</p>
+          <a href="#infos" class="collection-link">Découvrir en boutique <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+
+      <article class="collection-card reveal reveal-delay-2">
+        <!-- EMPLACEMENT IMAGE : photo des dernières arrivées en
+             boutique. Remplacer par :
+             <img src="images/collection-nouveautes.jpg" alt="Nouveautés Piccolina"> -->
+        <div class="placeholder-img collection-img-ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Photo nouveautés</span>
+        </div>
+        <div class="collection-body">
+          <h3>Nouveautés</h3>
+          <p>Les dernières arrivées, commandées en petites séries — à découvrir vite, avant qu'elles ne trouvent preneuse.</p>
+          <a href="#infos" class="collection-link">Découvrir en boutique <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="thread-divider reveal-thread">
+  <svg viewBox="0 0 340 34" preserveAspectRatio="xMidYMid meet">
+    <path class="thread-line" d="M2 17 C 60 2, 100 32, 170 17 S 280 2, 338 17"/>
+    <circle cx="2" cy="17" r="5" fill="#E2A23A"/>
+    <circle cx="113" cy="22" r="5" fill="#D87B4A"/>
+    <circle cx="170" cy="17" r="5.5" fill="#F0A471"/>
+    <circle cx="227" cy="11" r="5" fill="#8C9968"/>
+    <circle cx="338" cy="17" r="5" fill="#E2A23A"/>
+  </svg>
+</div>
+
+<!-- ============================================
+     MARQUES
+     ============================================ -->
+<section class="marques" id="marques">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Elles font partie de la sélection</span>
+      <h2>Nos marques</h2>
+    </div>
+    <div class="marques-list reveal reveal-delay-1">
+      <span class="brand">Vanessa Bruno</span>
+      <span class="brand">HIGH</span>
+      <span class="brand">NotShy</span>
+    </div>
+    <p class="marques-note reveal reveal-delay-2">Et bien d'autres pièces coup de cœur, renouvelées au fil des saisons.</p>
+  </div>
+</section>
+
+<div class="thread-divider reveal-thread">
+  <svg viewBox="0 0 340 34" preserveAspectRatio="xMidYMid meet">
+    <path class="thread-line" d="M2 17 C 60 32, 100 2, 170 17 S 280 32, 338 17"/>
+    <circle cx="2" cy="17" r="5" fill="#D87B4A"/>
+    <circle cx="113" cy="11" r="5" fill="#8C9968"/>
+    <circle cx="170" cy="17" r="5.5" fill="#E2A23A"/>
+    <circle cx="227" cy="23" r="5" fill="#F0A471"/>
+    <circle cx="338" cy="17" r="5" fill="#D87B4A"/>
+  </svg>
+</div>
+
+<!-- ============================================
+     INFOS PRATIQUES
+     ============================================ -->
+<section class="infos" id="infos">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Nous trouver</span>
+      <h2>Infos pratiques</h2>
+    </div>
+
+    <div class="infos-grid reveal">
+      <div class="infos-card">
+        <h3>Piccolina</h3>
+
+        <div class="infos-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span><strong>Adresse</strong>Avenue Louis Lajarrige, La Baule-les-Pins<br><em style="opacity:0.65;font-size:0.85em;"></em></span>
+        </div>
+
+        <div class="infos-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          <span><strong>Horaires</strong>Mardi – Samedi : 10h–13h / 15h–19h<br>Dimanche : 10h–13h · Fermé le lundi</span>
+        </div>
+
+        <div class="infos-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.81.34 1.6.65 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.22a2 2 0 0 1 2.11-.45c.74.31 1.53.53 2.34.65A2 2 0 0 1 22 16.92z"/></svg>
+          <span><strong>Téléphone</strong>02 44 07 63 27</span>
+        </div>
+
+        <a href="tel:0244076327" class="infos-cta">Appeler la boutique</a>
+      </div>
+
+      <div class="infos-map">
+        <iframe
+          src="https://maps.google.com/maps?q=Avenue+Louis+Lajarrige+La+Baule-les-Pins&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Localisation de Piccolina, Avenue Louis Lajarrige, La Baule-les-Pins">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     FOOTER
+     ============================================ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-brand">
+      <!-- EMPLACEMENT IMAGE : variante claire du logo pour fond
+           sombre. Remplacer par :
+           <img src="images/logo-blanc.png" alt="Piccolina" style="width:40px;height:40px;border-radius:50%;"> -->
+      <div class="placeholder-img footer-logo-ph">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      </div>
+      <span class="footer-brand-name">Piccolina</span>
+    </div>
+
+    <div class="footer-social">
+      <a href="https://www.facebook.com/PiccolinaLaBaule/" target="_blank" rel="noopener" aria-label="Piccolina sur Facebook">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      </a>
+      
+    </div>
+  </div>
+  <p class="footer-bottom">© 2026 Piccolina — La Baule-les-Pins. Site réalisé avec soin.</p>
+</footer>
+
+<script>
+(function(){
+  // ---- Header : fond au scroll ----
+  const header = document.getElementById('siteHeader');
+  const onScroll = () => {
+    if (window.scrollY > 60) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  };
+  document.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ---- Menu mobile ----
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('mainNav');
+  toggle.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    toggle.classList.toggle('is-open', isOpen);
+  });
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.classList.remove('is-open');
+    });
+  });
+
+  // ---- Révélations au scroll ----
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal, .thread-divider').forEach(el => observer.observe(el));
+})();
+</script>
+
+</body>
+</html>
